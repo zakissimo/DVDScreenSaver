@@ -1,0 +1,16 @@
+body {
+	overflow: hidden; /* Hide scrollbars */
+	background-color: #171717;
+}
+
+#background {
+	background-color: #171717;
+	height: 100vh;
+	width: 100vw;
+}
+
+#dvd-logo {
+	/* border: 1px solid grey; */
+	width: 27%;
+	height: 12%;
+}
