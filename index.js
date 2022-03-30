@@ -1,6 +1,12 @@
 let dvdLogo = document.getElementById("dvd-logo");
-const dvdLogoWidth = dvdLogo.clientWidth;
-const dvdLogoHeight = dvdLogo.clientHeight;
+// The following is hardcoded because dvdLogo.getBoundingClientRect() returns 0
+// Even though on the browser I get a value ...
+const dvdLogoWidth = 250;
+const dvdLogoHeight = 113;
+
+console.log(dvdLogoWidth, dvdLogoHeight);
+console.log();
+
 const colorPalette = [
   "#F5E0DC",
   "#F2CDCD",
