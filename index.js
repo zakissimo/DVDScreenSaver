@@ -1,7 +1,6 @@
 let dvdLogo = document.getElementById("dvd-logo");
 const dvdLogoWidth = dvdLogo.clientWidth;
 const dvdLogoHeight = dvdLogo.clientHeight;
-console.log(dvdLogoHeight, dvdLogoWidth);
 const colorPalette = [
   "#F5E0DC",
   "#F2CDCD",
