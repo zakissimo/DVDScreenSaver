@@ -1,9 +1,9 @@
 let dvdLogo = document.getElementById('dvd-logo');
-console.log(dvdLogo);
 // The following is hardcoded because dvdLogo.getBoundingClientRect() returns 0
 // Even though on the browser I get a value ...
 
 document.addEventListener('DOMContentLoaded', (event) => {
+  console.log(dvdLogo);
   console.log(dvdLogo.getBoundingClientRect());
 });
 const dvdLogoWidth = 250;
