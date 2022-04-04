@@ -1,13 +1,4 @@
 let dvdLogo = document.getElementById('dvd-logo');
-// The following is hardcoded because dvdLogo.getBoundingClientRect() returns 0
-// Even though on the browser I get a value ...
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  console.log(dvdLogo);
-  console.log(dvdLogo.getBoundingClientRect());
-});
-const dvdLogoWidth = 250;
-const dvdLogoHeight = 113;
 
 const colorPalette = [
   '#F5E0DC',
@@ -42,20 +33,16 @@ function changeSVGColor(color) {
 }
 
 function loop(timeStamp) {
+  const dvdLogoWidth = dvdLogo.getBoundingClientRect().width;
+  const dvdLogoHeight = dvdLogo.getBoundingClientRect().height;
   let width = document.getElementById('background').clientWidth;
   let height = document.getElementById('background').clientHeight;
 
-  if (x + dvdLogoWidth >= width) {
-    dx = -1;
+  if (x + dvdLogoWidth >= width || x < 0) {
+    dx *= -1;
     changeSVGColor(colorPalette[paletteIdx]);
-  } else if (y + dvdLogoHeight >= height) {
-    dy = -1;
-    changeSVGColor(colorPalette[paletteIdx]);
-  } else if (x < 0) {
-    dx = 1;
-    changeSVGColor(colorPalette[paletteIdx]);
-  } else if (y < 0) {
-    dy = 1;
+  } else if (y + dvdLogoHeight >= height || y < 0) {
+    dy *= -1;
     changeSVGColor(colorPalette[paletteIdx]);
   }
 
