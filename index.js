@@ -17,40 +17,41 @@ const colorPalette = [
 ];
 
 function init() {
-  window.requestAnimationFrame(loop);
 }
 
-let x = 1;
-let y = 1;
-let dx = 1;
-let dy = 1;
-let paletteIdx = 0;
-const speed = 5;
+(() => {
+  let x = 1;
+  let y = 1;
+  let dx = 1;
+  let dy = 1;
+  let paletteIdx = 0;
+  const speed = 5;
 
-function changeSVGColor(color) {
-  paletteIdx = (paletteIdx + 1) % colorPalette.length;
-  dvdLogo.style.color = color;
-}
-
-function loop(timeStamp) {
-  const dvdLogoWidth = dvdLogo.getBoundingClientRect().width;
-  const dvdLogoHeight = dvdLogo.getBoundingClientRect().height;
-  let width = document.getElementById('background').clientWidth;
-  let height = document.getElementById('background').clientHeight;
-
-  if (x + dvdLogoWidth >= width || x < 0) {
-    dx *= -1;
-    changeSVGColor(colorPalette[paletteIdx]);
-  } else if (y + dvdLogoHeight >= height || y < 0) {
-    dy *= -1;
-    changeSVGColor(colorPalette[paletteIdx]);
+  function changeSVGColor(color) {
+    paletteIdx = (paletteIdx + 1) % colorPalette.length;
+    dvdLogo.style.color = color;
   }
 
-  x += dx * speed;
-  y += dy * speed;
+  function loop(timeStamp) {
+    const dvdLogoWidth = dvdLogo.getBoundingClientRect().width;
+    const dvdLogoHeight = dvdLogo.getBoundingClientRect().height;
+    let width = document.getElementById('background').clientWidth;
+    let height = document.getElementById('background').clientHeight;
 
-  dvdLogo.style.transform = `translate(${x}px,${y}px)`;
+    if (x + dvdLogoWidth >= width || x < 0) {
+      dx *= -1;
+      changeSVGColor(colorPalette[paletteIdx]);
+    } else if (y + dvdLogoHeight >= height || y < 0) {
+      dy *= -1;
+      changeSVGColor(colorPalette[paletteIdx]);
+    }
 
+    x += dx * speed;
+    y += dy * speed;
+
+    dvdLogo.style.transform = `translate(${x}px,${y}px)`;
+
+    window.requestAnimationFrame(loop);
+  }
   window.requestAnimationFrame(loop);
-}
-init();
+})();
