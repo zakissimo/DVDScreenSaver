@@ -1,5 +1,12 @@
 let dvdLogo = document.getElementById('dvd-logo');
 
+let x = 1;
+let y = 1;
+let dx = 1;
+let dy = 1;
+let paletteIdx = 0;
+const speed = 5;
+
 const colorPalette = [
   '#F5E0DC',
   '#F2CDCD',
@@ -16,42 +23,31 @@ const colorPalette = [
   '#C9CBFF',
 ];
 
-function init() {
+function changeSVGColor(color) {
+  paletteIdx = (paletteIdx + 1) % colorPalette.length;
+  dvdLogo.style.color = color;
 }
 
-(() => {
-  let x = 1;
-  let y = 1;
-  let dx = 1;
-  let dy = 1;
-  let paletteIdx = 0;
-  const speed = 5;
+function loop(timeStamp) {
+  const dvdLogoWidth = dvdLogo.getBoundingClientRect().width;
+  const dvdLogoHeight = dvdLogo.getBoundingClientRect().height;
+  let width = document.getElementById('background').clientWidth;
+  let height = document.getElementById('background').clientHeight;
 
-  function changeSVGColor(color) {
-    paletteIdx = (paletteIdx + 1) % colorPalette.length;
-    dvdLogo.style.color = color;
+  if (x + dvdLogoWidth >= width || x < 0) {
+    dx *= -1;
+    changeSVGColor(colorPalette[paletteIdx]);
+  } else if (y + dvdLogoHeight >= height || y < 0) {
+    dy *= -1;
+    changeSVGColor(colorPalette[paletteIdx]);
   }
 
-  function loop(timeStamp) {
-    const dvdLogoWidth = dvdLogo.getBoundingClientRect().width;
-    const dvdLogoHeight = dvdLogo.getBoundingClientRect().height;
-    let width = document.getElementById('background').clientWidth;
-    let height = document.getElementById('background').clientHeight;
+  x += dx * speed;
+  y += dy * speed;
 
-    if (x + dvdLogoWidth >= width || x < 0) {
-      dx *= -1;
-      changeSVGColor(colorPalette[paletteIdx]);
-    } else if (y + dvdLogoHeight >= height || y < 0) {
-      dy *= -1;
-      changeSVGColor(colorPalette[paletteIdx]);
-    }
+  dvdLogo.style.transform = `translate(${x}px,${y}px)`;
 
-    x += dx * speed;
-    y += dy * speed;
-
-    dvdLogo.style.transform = `translate(${x}px,${y}px)`;
-
-    window.requestAnimationFrame(loop);
-  }
   window.requestAnimationFrame(loop);
-})();
+}
+
+window.requestAnimationFrame(loop);
