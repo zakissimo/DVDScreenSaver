@@ -1,10 +1,10 @@
 body {
-	overflow: hidden; /* Hide scrollbars */
-	background-color: #171717;
+  overflow: hidden; /* Hide scrollbars */
+  background-color: #171717;
 }
 
 #background {
-	background-color: #171717;
-	height: 100vh;
-	width: 100vw;
+  background-color: #171717;
+  height: 100vh;
+  width: 100vw;
 }
